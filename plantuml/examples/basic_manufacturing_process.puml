@@ -1,0 +1,31 @@
+@startuml
+' Basic Manufacturing Process Flow
+' Description: Simple manufacturing process with quality control
+!theme plain
+
+title Basic Manufacturing Process Flow
+
+start
+
+:Raw Material Input;
+:Material Inspection;
+if (Quality OK?) then (yes)
+  :Load into Production Line;
+  :Manufacturing Process;
+  :Quality Control Check;
+  if (Final Quality OK?) then (yes)
+    :Package Product;
+    :Ship to Warehouse;
+    stop
+  else (no)
+    :Mark as Defective;
+    :Send to Rework;
+    stop
+  endif
+else (no)
+  :Reject Material;
+  :Return to Supplier;
+  stop
+endif
+
+@enduml

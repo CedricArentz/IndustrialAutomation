@@ -1,0 +1,32 @@
+@startuml
+' Temperature Control System
+' Description: Automated temperature monitoring and control system
+!theme plain
+
+title Temperature Control System
+
+participant "Temperature Sensor" as sensor
+participant "PLC Controller" as plc
+participant "Heating System" as heater
+participant "Cooling System" as cooler
+participant "Operator Interface" as hmi
+
+sensor -> plc : Temperature Reading
+plc -> plc : Compare with Setpoint
+
+alt Temperature too low
+    plc -> heater : Activate Heating
+    plc -> hmi : Display "Heating Active"
+    heater -> sensor : Temperature Increase
+else Temperature too high
+    plc -> cooler : Activate Cooling
+    plc -> hmi : Display "Cooling Active"
+    cooler -> sensor : Temperature Decrease
+else Temperature in range
+    plc -> hmi : Display "Temperature OK"
+end
+
+sensor -> plc : New Temperature Reading
+note right : Continuous monitoring loop
+
+@enduml

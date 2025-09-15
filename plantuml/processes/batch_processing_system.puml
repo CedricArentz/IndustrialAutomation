@@ -1,0 +1,63 @@
+@startuml
+' Batch Processing System
+' Description: Automated batch mixing and processing system
+!theme plain
+
+title Batch Processing System
+
+start
+
+:Receive Batch Recipe;
+:Check Raw Material Availability;
+
+if (Materials Available?) then (no)
+  :Order Missing Materials;
+  :Wait for Delivery;
+endif
+
+:Prepare Mixing Tank;
+:Open Tank Valves;
+
+repeat
+  :Load Material A;
+  :Weigh Material A;
+  if (Weight Correct?) then (no)
+    :Adjust Weight;
+  endif
+repeat while (More Materials?)
+
+:Close Input Valves;
+:Start Mixing Process;
+
+fork
+  :Monitor Temperature;
+  repeat
+    :Check Temperature;
+    if (Too Hot?) then (yes)
+      :Activate Cooling;
+    elseif (Too Cold?) then (yes)
+      :Activate Heating;
+    endif
+  repeat while (Mixing Active?)
+fork again
+  :Monitor Mixing Speed;
+  :Adjust RPM as needed;
+fork again
+  :Monitor Processing Time;
+end fork
+
+:Stop Mixing;
+:Quality Control Sample;
+
+if (Quality OK?) then (yes)
+  :Transfer to Storage Tank;
+  :Clean Mixing Tank;
+  :Update Batch Records;
+  stop
+else (no)
+  :Rework Batch;
+  :Adjust Parameters;
+  :Restart Mixing;
+endif
+
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+' Conveyor Belt Control System
+' Description: Automated conveyor belt system with product sorting
+!theme plain
+
+title Conveyor Belt Control System
+
+|Operator|
+start
+:Start System;
+
+|Control System|
+:Initialize Conveyor;
+:Start Belt Motor;
+
+|Sensor Array|
+:Monitor Product Detection;
+
+repeat
+  |Sensor Array|
+  :Product Detected;
+  
+  |Control System|
+  :Read Product Barcode;
+  :Determine Destination;
+  
+  fork
+    :Update Production Count;
+  fork again
+    :Log Product Data;
+  end fork
+  
+  if (Sort Required?) then (yes)
+    :Activate Sorting Mechanism;
+    :Divert to Appropriate Lane;
+  else (no)
+    :Continue on Main Belt;
+  endif
+  
+  |Sensor Array|
+  :Product Passed;
+  
+repeat while (System Running?)
+
+|Control System|
+:Stop Belt Motor;
+:System Shutdown;
+stop
+
+@enduml
