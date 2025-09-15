@@ -1,0 +1,47 @@
+@startuml
+' Safety Interlock System
+' Description: Industrial safety system with emergency stops and interlocks
+!theme plain
+
+title Safety Interlock System
+
+start
+
+:System Startup;
+:Initialize Safety Checks;
+
+:Check Emergency Stops;
+if (E-Stop Active?) then (yes)
+  :System Shutdown;
+  :Display Safety Alert;
+  stop
+else (no)
+  :Check Safety Gates;
+  if (Gates Closed?) then (yes)
+    :Check Light Curtains;
+    if (Light Curtains Clear?) then (yes)
+      :Enable Production;
+      :Monitor Continuously;
+      
+      repeat
+        :Check Safety Status;
+        if (Safety Violation?) then (yes)
+          :Trigger Safety Stop;
+          :Log Incident;
+          stop
+        endif
+      repeat while (System Running?)
+      
+    else (no)
+      :Disable Production;
+      :Alert: Light Curtain Breach;
+      stop
+    endif
+  else (no)
+    :Disable Production;
+    :Alert: Safety Gate Open;
+    stop
+  endif
+endif
+
+@enduml

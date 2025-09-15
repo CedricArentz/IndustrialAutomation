@@ -1,0 +1,63 @@
+@startuml
+' [Process Name] Template
+' Description: [Brief description of what this process does]
+' Author: [Your Name]
+' Date: [Creation Date]
+' Version: [Version Number]
+
+!theme plain
+
+title [Your Process Title]
+
+' Use start/stop for activity diagrams
+start
+
+' Example process steps
+:[Step 1 Description];
+
+' Decision points
+if ([Condition]?) then (yes)
+  :[Action if true];
+else (no)
+  :[Action if false];
+endif
+
+' Parallel processing
+fork
+  :[Parallel Action 1];
+fork again
+  :[Parallel Action 2];
+end fork
+
+' Loops
+repeat
+  :[Repeated Action];
+repeat while ([Loop Condition]?)
+
+:[Final Step];
+stop
+
+' Notes and documentation
+note right
+  Add explanatory notes here
+  for complex processes
+end note
+
+@enduml
+
+' Usage Instructions:
+' 1. Replace [placeholders] with your actual content
+' 2. Customize the flow based on your process
+' 3. Add appropriate decision points and loops
+' 4. Include notes for clarity
+' 5. Test the diagram before committing
+' 
+' Common PlantUML Elements:
+' - start/stop: Process boundaries
+' - :action;: Process steps
+' - if/then/else/endif: Decision points
+' - fork/fork again/end fork: Parallel processes
+' - repeat/repeat while: Loops
+' - note: Documentation
+' - partition: Group related steps
+' - |swimlane|: Different actors/systems

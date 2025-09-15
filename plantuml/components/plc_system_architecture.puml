@@ -1,0 +1,86 @@
+@startuml
+' PLC System Architecture
+' Description: Basic PLC system components and connections
+!theme plain
+
+title PLC System Architecture
+
+package "Input Module" {
+  class DigitalInput {
+    +Integer channelNumber
+    +Boolean currentState
+    +String signalType
+    --
+    +Boolean readInput()
+    +void setFilter()
+  }
+  
+  class AnalogInput {
+    +Integer channelNumber
+    +Double currentValue
+    +String signalType
+    +Double scalingFactor
+    --
+    +Double readValue()
+    +Double convertToEngineering()
+  }
+}
+
+package "Central Processing Unit" {
+  class PLCProcessor {
+    +String cpuModel
+    +Integer scanTime
+    +Integer memorySize
+    --
+    +void executeScan()
+    +void processLogic()
+    +Boolean diagnostics()
+  }
+}
+
+package "Output Module" {
+  class DigitalOutput {
+    +Integer channelNumber
+    +Boolean outputState
+    +String outputType
+    --
+    +void setOutput(Boolean state)
+    +Boolean getStatus()
+  }
+  
+  class AnalogOutput {
+    +Integer channelNumber
+    +Double outputValue
+    +String signalType
+    --
+    +void setOutput(Double value)
+    +Double getCurrentOutput()
+  }
+}
+
+package "Communication" {
+  class EthernetModule {
+    +String ipAddress
+    +Integer port
+    --
+    +void sendData()
+    +void receiveData()
+  }
+  
+  class SerialModule {
+    +String comPort
+    +Integer baudRate
+    --
+    +void transmit()
+    +void receive()
+  }
+}
+
+PLCProcessor --> DigitalInput : reads
+PLCProcessor --> AnalogInput : reads
+PLCProcessor --> DigitalOutput : controls
+PLCProcessor --> AnalogOutput : controls
+PLCProcessor --> EthernetModule : communicates
+PLCProcessor --> SerialModule : communicates
+
+@enduml

@@ -1,0 +1,63 @@
+@startuml
+' Industrial Sensors Component Diagram
+' Description: Common industrial sensors and their interfaces
+!theme plain
+
+title Industrial Sensors Components
+
+package "Temperature Sensors" {
+  class TemperatureSensor {
+    +String sensorID
+    +Double currentTemp
+    +Double minRange
+    +Double maxRange
+    +String unit
+    --
+    +Double readTemperature()
+    +Boolean isWithinRange()
+    +void calibrate()
+  }
+  
+  class ThermocoupleSensor extends TemperatureSensor {
+    +String thermocoupleType
+    +Double coldJunctionTemp
+    --
+    +void compensateColdJunction()
+  }
+  
+  class RTDSensor extends TemperatureSensor {
+    +Double resistance
+    +String rtdType
+    --
+    +Double calculateTemperature()
+  }
+}
+
+package "Pressure Sensors" {
+  class PressureSensor {
+    +String sensorID
+    +Double currentPressure
+    +Double maxPressure
+    +String unit
+    --
+    +Double readPressure()
+    +Boolean checkOverpressure()
+  }
+}
+
+package "Proximity Sensors" {
+  class ProximitySensor {
+    +String sensorID
+    +Boolean objectDetected
+    +Double detectionRange
+    --
+    +Boolean detectObject()
+    +void setDetectionRange()
+  }
+  
+  class InductiveSensor extends ProximitySensor
+  class CapacitiveSensor extends ProximitySensor
+  class OpticalSensor extends ProximitySensor
+}
+
+@enduml
